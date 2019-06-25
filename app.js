@@ -39,4 +39,4 @@ app.post('/stories', (req, res) => {
 })
 
 // server
-app.listen(process.env.port || 3000, () => console.log('running..'))
+app.listen(process.env.PORT || 3000, () => console.log('running..'))
