@@ -19,6 +19,10 @@ app.use(express.json())
 // API
 const Story = require('./models/story')
 
+app.get('/', (req, res) => {
+    res.json({ msg: 'Home' })
+})
+
 app.get('/stories', (req, res) => {
     Story.find().then(stories => res.json(stories))
 })
