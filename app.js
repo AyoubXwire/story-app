@@ -5,7 +5,11 @@ var cors = require('cors')
 var app = express()
 
 // Connect to database
-mongoose.connect('mongodb://localhost:27017/story', { useNewUrlParser: true })
+if(process.env.NODE_ENV === 'production') {
+    mongoose.connect('mongodb://benayoubid:benayoubid101@ds055935.mlab.com:55935/story', { useNewUrlParser: true })
+} else {
+    mongoose.connect('mongodb://localhost:27017/story', { useNewUrlParser: true })
+}
 
 // Middleware
 app.use(cors())
