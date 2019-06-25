@@ -1,0 +1,34 @@
+const express = require('express')
+const mongoose = require('mongoose')
+var cors = require('cors')
+
+var app = express()
+
+// Connect to database
+mongoose.connect('mongodb://localhost:27017/story', { useNewUrlParser: true })
+
+// Middleware
+app.use(cors())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+
+// API
+const Story = require('./models/story')
+
+app.get('/stories', (req, res) => {
+    Story.find().then(stories => res.json(stories))
+})
+
+app.post('/stories', (req, res) => {
+    const data = {
+        title: req.body.title,
+        author: req.body.author,
+        content: req.body.content,
+        category: req.body.category
+    }
+
+    Story.create(data).then(() => res.json('story added'))
+})
+
+// server
+app.listen(3000, () => console.log('running..'))
